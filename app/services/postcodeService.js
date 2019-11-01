@@ -1,9 +1,12 @@
 const internalLookup = require('./internalPostcodeLookup')
-const freeLookup = require('./freePostcodeLookup')
+// const freeLookup = require('./freePostcodeLookup')
 const {isUndefined, isNull, map, chain} = require('lodash')
 
+/* JHS 291019 remove freelookup */
+console.log('internal lookup token ' + internalLookup.token())
 module.exports = function (postcode) {
-  const addressLookup = isUndefined(internalLookup.token()) ? freeLookup : internalLookup
+// const addressLookup = isUndefined(internalLookup.token()) ? freeLookup : internalLookup 
+  const addressLookup = internalLookup
   return addressLookup.lookup(postcode)
     .then(addresses => map(addresses, addressArray => chain(addressArray)
       .filter(line => (!isUndefined(line) && !isNull(line) && (line.length > 0)))

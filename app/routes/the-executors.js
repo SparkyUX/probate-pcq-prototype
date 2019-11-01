@@ -187,6 +187,10 @@ module.exports = function (router) {
   })
 
   const getExecutorName = (req) => {
+    console.log('req.session.data.currentExecutorToEdit ' + req.session.data.currentExecutorToEdit)
+    console.log('req.session.data.applicantname ' + req.session.data.executorCurrentFirstName)
+    console.log('executorName ' + req.session.data.executorName)
+
     const currentFirstName = get(req.session.data, `executorCurrentFirstName${req.session.data.currentExecutorToEdit}`, '[executorCurrentFirstName]')
     const currentLastName = get(req.session.data, `executorCurrentLastName${req.session.data.currentExecutorToEdit}`, '[executorCurrentLastName]')
     const currentFullName = currentFirstName + ' ' + currentLastName
@@ -281,7 +285,7 @@ module.exports = function (router) {
         data: req.session.data
       })
     }
-    return res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction')
   })
 
   const handleNextRemainingExecutor = (req, res) => {
@@ -299,7 +303,7 @@ module.exports = function (router) {
       return res.redirect(`remaining-executors`)
     }
     unset(req.session.data, 'currentExecutorToEdit')
-    return res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction')
   }
 
   router.post('/the-executors/remaining-executors', function (req, res) {
