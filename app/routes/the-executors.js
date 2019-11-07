@@ -281,7 +281,12 @@ module.exports = function (router) {
         data: req.session.data
       })
     }
-    return res.redirect('/tasklist/review-and-confirm')
+// JHS 041119 redirect to PCQs not tasklist, add query string for multiple executors
+    if (req.session.data.numberOfExecutors > 1) {
+      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=multiple')}
+    else {
+      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=single')}
+
   })
 
   const handleNextRemainingExecutor = (req, res) => {
@@ -299,7 +304,12 @@ module.exports = function (router) {
       return res.redirect(`remaining-executors`)
     }
     unset(req.session.data, 'currentExecutorToEdit')
-    return res.redirect('/tasklist/review-and-confirm')
+// JHS 041119 redirect to PCQs not tasklist, add query string for multiple executors
+    if (req.session.data.numberOfExecutors > 1) {
+      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=multiple')}
+    else {
+      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=single')}
+
   }
 
   router.post('/the-executors/remaining-executors', function (req, res) {
