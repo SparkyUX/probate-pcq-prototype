@@ -3,9 +3,9 @@ const {map, chain, isNull, toLower, upperFirst} = require('lodash')
 const mockData = require('./postcodeLookupMockData.json')
 
 const addressFields = [
-  'organisation_name',
-  'department_name',
-  'po_box_number',
+//  'organisation_name',
+//  'department_name',
+//  'po_box_number',
   'building_name',
   'sub_building_name',
   'building_number',
