@@ -24,8 +24,6 @@ module.exports = {
   token: token,
   lookup: (postcode) => {
     if (token()) {
-      console.log('token ' + token)
-
       return request({
         url: `https://postcodeinfo.service.justice.gov.uk/addresses/?postcode=${postcode}`,
         headers: {'Authorization': process.env.POST_CODE_ACCESS_TOKEN}
@@ -41,7 +39,6 @@ module.exports = {
           .value())
         )
     }
-    console.log('no token ' + token)
     return (new Promise((resolve, reject) => resolve(mockData)))
   }
 }
