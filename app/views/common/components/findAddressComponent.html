@@ -65,6 +65,7 @@
 
 <script type="text/javascript">
    function onLoadFunction() {
+
     $('#continue-button').removeClass('button');
     $('#continue-button').addClass('button-secondary');
     $('#find-button').click(function(e){
@@ -80,8 +81,10 @@
   }
 
   function showSelectAddress() {
+
     $('#address-select-container').removeClass('error');
     $('#address-select-container .error-message').hide();
+    
     $.ajax({
       url: "/postcode-lookup?postcode=" + encodeURIComponent($('#postcode').val()),
       method: "GET",
@@ -96,7 +99,8 @@
             $('#find-button').addClass('button-secondary');
             }
           $.each(data, function(id, address){
-            html += `<option value="${address}">${address}</option>`
+//            html += `<option value="${address}">${address}</option>`
+           html += '<option value="' + address + '">' + address + '</option>'
           });
 
           $('#addressList').html(html);
