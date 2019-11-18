@@ -4,4 +4,7 @@ module.exports = function (router) {
     req.session.reviewAndConfirmWaitingSeen = true
     next()
   })
+  router.get('/tasklist/equality-diversity', function (req, res, next) {
+    res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction')
+  })
 }

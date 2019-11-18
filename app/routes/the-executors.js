@@ -281,11 +281,7 @@ module.exports = function (router) {
         data: req.session.data
       })
     }
-// JHS 041119 redirect to PCQs not tasklist, add query string for multiple executors
-    if (req.session.data.numberOfExecutors > 1) {
-      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=multiple')}
-    else {
-      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=single')}
+    return res.redirect('/tasklist/review-and-confirm')
 
   })
 
@@ -299,18 +295,14 @@ module.exports = function (router) {
         }
       }
     }
-    if (executorsNotApplying > 0) {
+   if (executorsNotApplying > 0) {
       req.session.data.currentExecutorToEdit = executorsNotApplying[0]
       return res.redirect(`remaining-executors`)
     }
     unset(req.session.data, 'currentExecutorToEdit')
-// JHS 041119 redirect to PCQs not tasklist, add query string for multiple executors
-    if (req.session.data.numberOfExecutors > 1) {
-      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=multiple')}
-    else {
-      return res.redirect('https://hmcts-pcq-prototype.herokuapp.com/introduction?userType=single')}
-
+    return res.redirect('/tasklist/review-and-confirm')
   }
+
 
   router.post('/the-executors/remaining-executors', function (req, res) {
     switch (get(req.body, `notApplyingReason${req.session.data['currentExecutorToEdit']}`)) {
